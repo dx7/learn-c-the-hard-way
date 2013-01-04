@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <assert.h>
+#include <assert.h> // unused
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
   struct Connection *conn = Database_open(filename, action);
   int id = 0;
 
-  if (argc > 3) id = atoi(argc[3]);
+  if (argc > 3) id = atoi(argv[3]);
   if (id >= MAX_ROWS) die("There's a not that many records.");
 
   switch(action) {
