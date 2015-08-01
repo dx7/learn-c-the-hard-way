@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <assert.h> // unused
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>

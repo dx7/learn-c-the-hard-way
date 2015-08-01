@@ -1,1 +1,8 @@
+*
+!*/
+!*.*
+!Makefile
+!README
+.DS_Store
 *.dSYM
+*.dat
