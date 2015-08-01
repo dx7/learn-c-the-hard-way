@@ -1,46 +1,66 @@
 #include <stdio.h>
 #include <assert.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
-struct Person {
-  int age;
+typedef struct person {
   char *name;
-};
+  int age;
+  int height;
+  int weight;
+} Person;
 
-struct Person *Person_create(char *name, int age)
+Person Person_create(char *name, int age, int height, int weight)
 {
-  struct Person *person = malloc(sizeof(struct Person));
+  Person who;
 
-  assert(person != NULL);
+  who.name = strdup(name);
+  who.age = age;
+  who.height = height;
+  who.weight = weight;
 
-  person->name = strdup(name);
-  person->age = age;
-
-  printf("3 %p\n", person->name);
-
-  return person;
+  return who;
 }
 
-void Person_destroy(struct Person *person)
+void Person_destroy(Person who)
 {
-  assert(person != NULL);
+  free(who.name);
+}
 
-  free(person->name);
-  free(person);
+void Person_print(Person who)
+{
+  printf("Name: %s\n", who.name);
+  printf("\tAge: %d\n", who.age);
+  printf("\tHeight: %d\n", who.height);
+  printf("\tWeight: %d\n", who.weight);
 }
 
 int main(int argc, char *argv[])
 {
-  struct Person *person = Person_create("Rafael", 30);
+  // make two people structures
+  Person joe = Person_create(
+      "Joe Alex", 32, 64, 140);
 
-  printf("%s\n", person->name);
+  Person frank = Person_create(
+      "Frank Blank", 20, 72, 180);
 
-  Person_destroy(person);
+  // print them out and where they are in memory
+  Person_print(joe);
+  Person_print(frank);
 
-  printf("%s\n", person->name);
+  // make everyone age 20 years and print them again
+  joe.age += 20;
+  joe.height -= 2;
+  joe.weight += 40;
+  Person_print(joe);
 
-  puts("Done.");
+  frank.age += 20;
+  frank.weight += 20;
+  Person_print(frank);
+
+  // destroy them both so we clean up
+  Person_destroy(joe);
+  Person_destroy(frank);
 
   return 0;
 }
