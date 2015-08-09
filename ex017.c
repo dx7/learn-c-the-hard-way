@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
       Database_write(conn);
       break;
 
-    case '1':
+    case 'l':
       Database_list(conn);
       break;
     default:
